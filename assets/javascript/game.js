@@ -26,17 +26,16 @@ const pokemon = [
 ];
 
 //choose a character, unchosen move to enemies
-$(".pokemon").on("click", function() {
-  $("#bulbasaur").appendTo("#enemies-area");
-  $("#charmander").appendTo("#enemies-area");
-  $("#squirtle").appendTo("#enemies-area");
-  $("#pikachu").appendTo("#enemies-area");
+$("figure").on("click", function() {
+  $(this).removeClass("pokemon");
+  $(".pokemon").addClass("enemy");
+  $(".enemy").appendTo("#enemies-area");
   $(this).appendTo("#your-character");
-  $(".pokemon").off("click");
+  $("figure").off("click");
+  //choose an opponent
+  $(".enemy").on("click", function() {
+    $(this).appendTo("#defender");
+    $(".enemy").off("click");
+  });
+  //attack the opponent
 });
-
-// //choose an opponent from enemies to defend
-// $("#enemies-area #bulbasaur").on("click", function() {
-//   $(this).appendTo("#defender");
-// });
-//attack the opponent
