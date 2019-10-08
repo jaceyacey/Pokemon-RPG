@@ -25,17 +25,50 @@ const pokemon = [
   }
 ];
 
-//choose a character, unchosen move to enemies
+let yourPokemon = {};
+let selectedEnemy = {};
+let yourHp;
+let enemyHp;
+let isEnemyChosen = false;
+
+//choose a character
 $("figure").on("click", function() {
-  $(this).removeClass("pokemon");
-  $(".pokemon").addClass("enemy");
-  $(".enemy").appendTo("#enemies-area");
+  for (let i = 0; i < pokemon.length; i++) {
+    if (pokemon[i].name === $(this).attr("id")) {
+      yourPokemon = pokemon[i];
+      yourHp = yourPokemon.hp;
+    }
+  }
   $(this).appendTo("#your-character");
+  $(this).removeClass("enemy");
+  //move unchosen to enemies
+  $(".enemy").appendTo("#enemies-area");
   $("figure").off("click");
-  //choose an opponent
+  //choose an opponent from enemies
   $(".enemy").on("click", function() {
+    for (let i = 0; i < pokemon.length; i++) {
+      if (pokemon[i].name === $(this).attr("id")) {
+        selectedEnemy = pokemon[i];
+        enemyHp = selectedEnemy.hp;
+      }
+    }
     $(this).appendTo("#defender");
+    isEnemyChosen = true;
     $(".enemy").off("click");
   });
-  //attack the opponent
+});
+
+//attack the opponent
+$("#attack").on("click", function() {
+  if (!isEnemyChosen) return;
+  //display results of attack
+  $("#comments").html(
+    `<p>You attacked ${selectedEnemy.name} for ${yourPokemon.attack} damage.</p><p>${selectedEnemy.name} attacked you back for ${selectedEnemy.counter} damage.</p>`
+  );
+  //adjust your hp
+  yourHp -= selectedEnemy.counter;
+  $(`#${yourPokemon.name} .hp`).html(yourHp);
+  //adjust enemy hp
+  enemyHp -= yourPokemon.attack;
+  $(`#${selectedEnemy.name} .hp`).html(enemyHp);
 });
