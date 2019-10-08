@@ -28,6 +28,7 @@ const pokemon = [
 let yourPokemon = {};
 let selectedEnemy = {};
 let yourHp;
+let yourAttack;
 let enemyHp;
 let isEnemyChosen = false;
 
@@ -37,6 +38,7 @@ $("figure").on("click", function() {
     if (pokemon[i].name === $(this).attr("id")) {
       yourPokemon = pokemon[i];
       yourHp = yourPokemon.hp;
+      yourAttack = yourPokemon.attack;
     }
   }
   $(this).appendTo("#your-character");
@@ -63,12 +65,14 @@ $("#attack").on("click", function() {
   if (!isEnemyChosen) return;
   //display results of attack
   $("#comments").html(
-    `<p>You attacked ${selectedEnemy.name} for ${yourPokemon.attack} damage.</p><p>${selectedEnemy.name} attacked you back for ${selectedEnemy.counter} damage.</p>`
+    `<p>You attacked ${selectedEnemy.name} for ${yourAttack} damage.</p><p>${selectedEnemy.name} attacked you back for ${selectedEnemy.counter} damage.</p>`
   );
   //adjust your hp
   yourHp -= selectedEnemy.counter;
   $(`#${yourPokemon.name} .hp`).html(yourHp);
   //adjust enemy hp
-  enemyHp -= yourPokemon.attack;
+  enemyHp -= yourAttack;
   $(`#${selectedEnemy.name} .hp`).html(enemyHp);
+  //adjust your attack
+  yourAttack += yourPokemon.attack;
 });
