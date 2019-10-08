@@ -25,21 +25,18 @@ const pokemon = [
   }
 ];
 
-let isPokemonChosen = false;
-
-//display characters to choose from
-
-//choose a character
-$(".pokemon").click(function() {
-  if (isPokemonChosen) return;
-  isPokemonChosen = true;
+//choose a character, unchosen move to enemies
+$(".pokemon").on("click", function() {
   $("#bulbasaur").appendTo("#enemies-area");
   $("#charmander").appendTo("#enemies-area");
   $("#squirtle").appendTo("#enemies-area");
   $("#pikachu").appendTo("#enemies-area");
   $(this).appendTo("#your-character");
+  $(".pokemon").off("click");
 });
 
-//choose an opponent
-
+// //choose an opponent from enemies to defend
+// $("#enemies-area #bulbasaur").on("click", function() {
+//   $(this).appendTo("#defender");
+// });
 //attack the opponent
