@@ -28,18 +28,16 @@ const pokemon = [
 let isPokemonChosen = false;
 
 //display characters to choose from
-$("#start-area").prepend("<h2>Your Character</h2>");
 
 //choose a character
 $(".pokemon").click(function() {
   if (isPokemonChosen) return;
   isPokemonChosen = true;
-  $("#enemies-area").html("<h2>Enemies Available to Attack</h2>");
   $("#bulbasaur").appendTo("#enemies-area");
   $("#charmander").appendTo("#enemies-area");
   $("#squirtle").appendTo("#enemies-area");
   $("#pikachu").appendTo("#enemies-area");
-  $(this).appendTo("#start-area");
+  $(this).appendTo("#your-character");
 });
 
 //choose an opponent
