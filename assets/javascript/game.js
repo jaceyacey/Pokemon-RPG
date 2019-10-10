@@ -175,6 +175,9 @@ $("#attack").on("click", function() {
   // if character defeated                            LOSE GAME
   // ==============================================================
   if (characterHp < 1) {
+    // emphasise negative hp
+    $(`#${character.name} .hp`).css({ color: "red", "font-weight": "bold" });
+
     //loss comment
     $("#comments").html(`
     <p>You attacked ${defender.name} for ${totalAttack} damage.</p><p>${defender.name} attacked you back for ${defender.counter} damage.</p>
@@ -231,6 +234,9 @@ const reset = () => {
 
     //add hover effects to pokemon
     $(".pokemon").addClass("hover");
+
+    //hp back to normal
+    $(".hp").css({ color: "black", "font-weight": "normal" });
   });
 };
 
