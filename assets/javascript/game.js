@@ -79,7 +79,7 @@ $(".pokemon").on("click", function() {
 
 //ATTACK
 $("#attack").on("click", function() {
-  if (!isDefenderChosen) return;
+  if (!isDefenderChosen || enemiesLeft < 1) return;
   //display results of attack
   $("#comments").html(
     `<p>You attacked ${defender.name} for ${totalAttack} damage.</p><p>${defender.name} attacked you back for ${defender.counter} damage.</p>`
@@ -100,7 +100,7 @@ $("#attack").on("click", function() {
     //adjust enemies left
     enemiesLeft -= 1;
     //if no opponents available, WIN GAME
-    if (!enemiesLeft) {
+    if (enemiesLeft < 1) {
       $("#comments").html("You won!!! GAME OVER!!!");
       reset();
     } else {
