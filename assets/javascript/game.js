@@ -1,27 +1,27 @@
 const pokemon = [
   {
     name: "Bulbasaur",
-    hp: 140,
-    attack: 8,
-    counter: 20
+    hp: 204,
+    attack: 12,
+    counter: 18
   },
   {
     name: "Charmander",
-    hp: 120,
-    attack: 12,
-    counter: 28
+    hp: 146,
+    attack: 20,
+    counter: 22
   },
   {
     name: "Squirtle",
-    hp: 160,
-    attack: 10,
-    counter: 24
+    hp: 190,
+    attack: 14,
+    counter: 20
   },
   {
     name: "Pikachu",
-    hp: 100,
-    attack: 14,
-    counter: 32
+    hp: 138,
+    attack: 26,
+    counter: 26
   }
 ];
 
