@@ -8,3 +8,7 @@ figure {
 figure img {
   width: 100%;
 }
+
+#end-game {
+  display: none;
+}
