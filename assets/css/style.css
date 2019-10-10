@@ -28,12 +28,16 @@ figure img {
   display: none;
 }
 
-.character {
-  border: 2px solid cornflowerblue;
+.red {
+  border: 2px solid red;
 }
 
 .black {
-  border: 2px solid red;
+  border: 1px solid black;
+}
+
+.character {
+  border: 2px solid cornflowerblue !important;
 }
 
 .defender {

@@ -67,7 +67,8 @@ $(".pokemon").on("click", function() {
     //move unchosen to enemies
     $(".enemy")
       .appendTo("#enemies-area")
-      .addClass("black");
+      .removeClass("black")
+      .addClass("red");
   } else {
     //--------------------
     // SELECTING OPPONENT
@@ -225,7 +226,8 @@ const reset = () => {
     $("#start-area").css("display", "block");
 
     //change back border style to black
-    $("figure").css("border", "1px solid black");
+    //$("figure").css("border", "1px solid black");
+    $("figure").addClass("black");
 
     //add hover effects to pokemon
     $(".pokemon").addClass("hover");
