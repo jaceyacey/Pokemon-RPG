@@ -53,7 +53,9 @@ $(".pokemon").on("click", function() {
       }
     }
     //move unchosen to enemies
-    $(".enemy").appendTo("#enemies-area");
+    $(".enemy")
+      .appendTo("#enemies-area")
+      .addClass("black");
   } else {
     //select an opponent
     if (

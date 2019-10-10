@@ -12,3 +12,16 @@ figure img {
 #end-game {
   display: none;
 }
+
+.black {
+  background-color: black;
+  color: white;
+}
+
+.defender {
+  background-color: red;
+}
+
+.character {
+  border: 2px solid cornflowerblue;
+}
