@@ -4,29 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Pokemon RPG</title>
   </head>
 
   <body>
-    <h1>Pokemon RPG!</h1>
+    <img
+      id="title"
+      src="./assets/images/pokemon-logo-png-pokemon-logo-text-png-1428-1390.png"
+    />
+    <h1>RPG!</h1>
     <div id="start-area">
-      <figure id="Bulbasaur" class="pokemon enemy">
+      <p>Choose your pokemon</p>
+      <figure id="Bulbasaur" class="pokemon enemy hover">
         <figcaption>Bulbasaur</figcaption>
         <img src="./assets/images/Bulbasaur.png" />
         <figcaption class="hp">200</figcaption>
       </figure>
-      <figure id="Charmander" class="pokemon enemy">
+      <figure id="Charmander" class="pokemon enemy hover">
         <figcaption>Charmander</figcaption>
         <img src="./assets/images/Charmander.png" />
         <figcaption class="hp">146</figcaption>
       </figure>
-      <figure id="Squirtle" class="pokemon enemy">
+      <figure id="Squirtle" class="pokemon enemy hover">
         <figcaption>Squirtle</figcaption>
         <img src="./assets/images/Squirtle.png" />
         <figcaption class="hp">180</figcaption>
       </figure>
-      <figure id="Pikachu" class="pokemon enemy">
+      <figure id="Pikachu" class="pokemon enemy hover">
         <figcaption>Pikachu</figcaption>
         <img src="./assets/images/Pikachu.png" />
         <figcaption class="hp">138</figcaption>
@@ -38,12 +47,18 @@
     <div id="enemies-area">
       <h3>Enemies Available to Attack</h3>
     </div>
-    <div id="fight-section"><h3>Fight Section</h3></div>
-    <button id="attack">Attack</button>
+
     <div id="defender"><h3>Defender</h3></div>
+    <div id="fight-section">
+      <div id="attack" class="button_cont">
+        <p class="button">Attack</p>
+      </div>
+    </div>
     <div id="comments"></div>
     <div id="end-game">
-      <button id="restart">Restart</button>
+      <div id="restart" class="button_cont">
+        <p class="button">Restart</p>
+      </div>
     </div>
 
     <script

@@ -1,3 +1,14 @@
+body {
+  font-family: "Lato", sans-serif;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+  text-align: center;
+  margin: 0 auto;
+}
+
 figure {
   width: 100px;
   border: 1px solid black;
@@ -9,19 +20,57 @@ figure img {
   width: 100%;
 }
 
-#end-game {
+#end-game,
+#your-character,
+#enemies-area,
+#fight-section,
+#defender {
   display: none;
-}
-
-.black {
-  background-color: black;
-  color: white;
-}
-
-.defender {
-  background-color: red;
 }
 
 .character {
   border: 2px solid cornflowerblue;
+}
+
+.black {
+  border: 2px solid red;
+}
+
+.defender {
+  background-color: red;
+  display: block;
+  margin: 0 auto;
+}
+
+.button {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #60a3bc;
+  padding: 20px;
+  border-radius: 50px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+
+.hover:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+  cursor: pointer;
+}
+
+#attack,
+#restart {
+  font-size: 1.2em;
+  letter-spacing: 0.15em;
+  line-height: 0.5em;
+}
+
+#title {
+  width: 480px;
+  margin: 0 auto;
+  display: block;
 }

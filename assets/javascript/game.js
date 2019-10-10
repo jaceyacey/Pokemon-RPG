@@ -34,15 +34,27 @@ let defender;
 let defenderHp;
 let enemiesLeft = 3;
 
-//CHOOSE CHARACTER AND DEFENDER
+//=================================================
+//        CHOOSE CHARACTER AND DEFENDER
+//=================================================
 $(".pokemon").on("click", function() {
-  //select a character
+  // hide start area
+  $("#start-area").css("display", "none");
+  //-----------------------
+  //  SELECTING CHARACTER
+  //-----------------------
   if (!isCharacterChosen) {
     $(this)
       .addClass("character")
-      .removeClass("enemy");
+      .removeClass("enemy hover");
+
+    //show character and enemies areas
+    $("#your-character, #enemies-area").css("display", "block");
+
+    //move character to character area
     $(".character").appendTo("#your-character");
     isCharacterChosen = true;
+
     //assign stats to character
     for (let i = 0; i < pokemon.length; i++) {
       if (pokemon[i].name === $(this).attr("id")) {
@@ -57,15 +69,17 @@ $(".pokemon").on("click", function() {
       .appendTo("#enemies-area")
       .addClass("black");
   } else {
-    //select an opponent
+    //--------------------
+    // SELECTING OPPONENT
+    //--------------------
     if (
       !isDefenderChosen &&
       !$(this).hasClass("character") &&
       characterHp > 0
     ) {
       $(this).addClass("defender");
-
       isDefenderChosen = true;
+
       //assign stats to defender
       for (let i = 0; i < pokemon.length; i++) {
         if (pokemon[i].name === $(this).attr("id")) {
@@ -73,50 +87,100 @@ $(".pokemon").on("click", function() {
           defenderHp = defender.hp;
         }
       }
+
+      //show defender area and fight section
+      $("#defender, #fight-section").css("display", "block");
+
       //move defender to defender area
       $(".defender").appendTo("#defender");
+
+      //remove comments
+      $("#comments").empty();
+
+      //remove hover effects on defender and remaining enemies
+      $(".enemy").removeClass("hover");
+
+      //add hover effects to attack button
+      $(".button").addClass("hover");
     }
   }
 });
 
-//ATTACK
+//================================================
+//                        ATTACK
+//================================================
 $("#attack").on("click", function() {
   if (!isDefenderChosen || enemiesLeft < 1) return;
+
   //display results of attack
   $("#comments").html(
     `<p>You attacked ${defender.name} for ${totalAttack} damage.</p><p>${defender.name} attacked you back for ${defender.counter} damage.</p>`
   );
+
   //adjust character hp
   characterHp -= defender.counter;
   $(`#${character.name} .hp`).html(characterHp);
+
   //adjust enemy hp
   defenderHp -= totalAttack;
   $(`#${defender.name} .hp`).html(defenderHp);
+
   //adjust character attack
   totalAttack += character.attack;
-  //DEFEATED DEFENDER
 
+  //==========================
+  //     WHEN DEFENDER DEAD
+  //==========================
   if (defenderHp < 1) {
     //figure disappears
-    $(".defender").css("visibility", "hidden");
+    $(".defender").css("display", "none");
+
     //adjust enemies left
     enemiesLeft -= 1;
-    //if no opponents available, WIN GAME
+
+    //remove hover effect on attack button
+    $(".button").removeClass("hover");
+
+    //hide defender and fight sections
+    $("#defender, #fight-section").css("display", "none");
+
+    //=============================================================
+    // if no opponents available                       WIN GAME
+    //=============================================================
     if (enemiesLeft < 1) {
-      $("#comments").html("You won!!! GAME OVER!!!");
+      //hide sections
+      $("#fight-section").css("display", "none");
+      $("#enemies-area").hide();
+
+      $("#comments").html(`
+        <p>You attacked ${defender.name} for ${totalAttack} damage.</p><p>${defender.name} attacked you back for ${defender.counter} damage.</p>
+        <p><strong>YOU WON!!! GAME OVER!!!</strong></p>`);
       reset();
     } else {
-      //else choose new opponent
+      //---------------------------------------------------------
+      // else choose new opponent                  CONTINUE GAME
+      //---------------------------------------------------------
+
       $("#comments").html(
-        `<p>You have defeated ${defender.name}. You can choose to fight another enemy.</p>`
+        `<p>You attacked ${defender.name} for ${totalAttack} damage.</p><p>${defender.name} attacked you back for ${defender.counter} damage.</p>
+        <p><strong>You have defeated ${defender.name}. You can choose to fight another enemy.</strong></p>`
       );
       isDefenderChosen = false;
+      //add hover effects to enemies
+      $(".enemy").addClass("hover");
     }
   }
-  // CHARACTER DEFEATED
+  // ==============================================================
+  // if character defeated                            LOSE GAME
+  // ==============================================================
   if (characterHp < 1) {
     //loss comment
-    $("#comments").html("<p>You have been defeated... GAME OVER!!!</p>");
+    $("#comments").html(`
+    <p>You attacked ${defender.name} for ${totalAttack} damage.</p><p>${defender.name} attacked you back for ${defender.counter} damage.</p>
+    <p><strong>You have been defeated... GAME OVER!!!</strong></p>`);
+
+    //hide attack button
+    $("#fight-section").css("display", "none");
     reset();
   }
 });
@@ -124,30 +188,55 @@ $("#attack").on("click", function() {
 const reset = () => {
   //show reset button
   $("#end-game").css("display", "block");
-  //restart game
+  $("#restart .button").addClass("hover");
+
+  //  =======================================
+  //             GAME RESET
+  //  =======================================
   $("#restart").on("click", function() {
     $(".pokemon")
       //make all pokemon visible
-      .css("visibility", "visible")
+      .css("display", "inline-block")
+
       //reset classes
       .removeClass("character defender")
       .addClass("enemy")
+
       //move all pokemon back to start area
       .appendTo("#start-area");
+
     //reset stats
     isCharacterChosen = false;
     isDefenderChosen = false;
     enemiesLeft = 3;
-    //reset hp
+
+    //reset html hp
     for (let i = 0; i < pokemon.length; i++) {
       $(`#${pokemon[i].name} .hp`).html(`${pokemon[i].hp}`);
     }
+
     //empty comments
     $("#comments").empty();
-    //hide reset button
-    $("#end-game").css("display", "none");
+
+    //hide reset button and your character section
+    $("#end-game, #your-character").css("display", "none");
+
+    // show start area
+    $("#start-area").css("display", "block");
+
+    //change back border style to black
+    $("figure").css("border", "1px solid black");
+
+    //add hover effects to pokemon
+    $(".pokemon").addClass("hover");
   });
 };
 
-//after game has been reset, when choosing new character
-//the one click makes this the character AND the defender
+//=================================================================
+//    ANSWER KEY
+//=================================================================
+//  B -> C -> P -> S
+//  S -> B -> C -> P
+//  C -> S -> B -> P
+//  P -> B -> S -> C
+//==================================================================
